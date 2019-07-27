@@ -1,3 +1,5 @@
+Intel Core-i7 6700 3.4GHz (4c/8t)
+
 generateRandomImageData :: 3840x2160
 numberOfIterations = 100
 
