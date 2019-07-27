@@ -1,0 +1,31 @@
+generateRandomImageData :: 3840x2160
+numberOfIterations = 100
+
+
+      32bit           32bit           64bit           64bit          64bit 
+                   (diff radius)                  (diff radius)   (int64 to int32)
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+      38.066ms        38.251ms        44.190ms        45.795ms       47.737ms         copyFirstPixelOnRow
+      38.778ms        39.625ms        43.061ms        42.475ms      374.671ms         copyFirstPixelOnRow_OpenMP single-threaded
+      16.277ms        17.043ms        17.408ms        17.839ms       97.479ms         copyFirstPixelOnRow_OpenMP multi-threaded
+          
+      54.036ms        55.411ms        63.321ms        63.683ms       63.735ms         copyFirstPixelOnRowUsingTSize
+      52.418ms        55.209ms       285.865ms       279.219ms       55.937ms         copyFirstPixelOnRowUsingTSize_OpenMP single-threaded
+      15.278ms        20.506ms        79.875ms        67.341ms       17.050ms         copyFirstPixelOnRowUsingTSize_OpenMP multi-threaded
+          
+      55.623ms        57.012ms        64.053ms        68.583ms       63.298ms         copyFirstPixelOnRowUsingTSizeAsFirstprivate_OpenMP single-threaded
+      15.307ms        16.586ms        16.552ms        19.554ms       17.089ms         copyFirstPixelOnRowUsingTSizeAsFirstprivate_OpenMP multi-threaded
+          
+     336.906ms       339.787ms       344.251ms       326.068ms      323.096ms         divideImageDataWithParam
+    1832.120ms      1840.241ms      6395.861ms      6336.586ms     1853.465ms         divideImageDataWithParam single-threaded
+     387.152ms       411.106ms      1204.302ms      1193.425ms      402.091ms         divideImageDataWithParam multi-threaded
+          
+   RADIUS = 1      RADIUS = 1      RADIUS = 1      RADIUS = 1     RADIUS = 1        
+    1830.731ms      3191.167ms      1548.739ms      2310.222ms     1763.659ms         boxFilterRow
+    3395.503ms      3397.992ms      2339.723ms      2285.364ms     2536.973ms         boxFilterRow_OpenMP single-threaded
+     825.947ms       798.610ms       622.652ms       603.008ms      564.825ms         boxFilterRow_OpenMP multi-threaded
+          
+   RADIUS = 1      RADIUS = 2      RADIUS = 1      RADIUS = 2     RADIUS = 1        
+    1829.829ms      3220.250ms      1550.539ms      2308.768ms     1796.410ms         boxFilterRow
+    3403.591ms      3377.814ms      2333.980ms      2297.244ms     2541.836ms         boxFilterRow_OpenMP single-threaded
+     764.191ms       781.894ms       595.062ms       566.332ms      592.855ms         boxFilterRow_OpenMP multi-threaded
